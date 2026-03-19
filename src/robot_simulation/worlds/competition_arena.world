@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<!--
+  competition_arena.world
+  ~~~~~~~~~~~~~~~~~~~~~~~
+  8 × 8 m walled arena for the personal competition robot.
+  Includes:
+    - Interaction targets (boxes the paddle effectors can sweep)
+    - Goal platform the crank effector deploys onto
+    - Three obstacle columns for Nav2 testing
+-->
+<sdf version="1.6">
+  <world name="competition_arena">
+
+    <physics type="ode">
+      <real_time_update_rate>1000.0</real_time_update_rate>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+    </physics>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.85 0.85 0.85 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range><constant>0.9</constant>
+        <linear>0.01</linear><quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- Ground -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>20 20</size></plane></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><plane><normal>0 0 1</normal><size>20 20</size></plane></geometry>
+          <material><script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <n>Gazebo/Grey</n>
+          </script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ── Arena walls (8 × 8 m, 0.5 m tall) ───────────────────────── -->
+    <model name="wall_north"><static>true</static><pose>0 4.05 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>8.2 0.1 0.5</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>8.2 0.1 0.5</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+            <n>Gazebo/White</n></script></material></visual>
+      </link>
+    </model>
+
+    <model name="wall_south"><static>true</static><pose>0 -4.05 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>8.2 0.1 0.5</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>8.2 0.1 0.5</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+            <n>Gazebo/White</n></script></material></visual>
+      </link>
+    </model>
+
+    <model name="wall_east"><static>true</static><pose>4.05 0 0.25 0 0 1.5708</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>8.2 0.1 0.5</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>8.2 0.1 0.5</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+            <n>Gazebo/White</n></script></material></visual>
+      </link>
+    </model>
+
+    <model name="wall_west"><static>true</static><pose>-4.05 0 0.25 0 0 1.5708</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>8.2 0.1 0.5</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>8.2 0.1 0.5</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+            <n>Gazebo/White</n></script></material></visual>
+      </link>
+    </model>
+
+    <!-- ── Paddle interaction targets (light boxes the paddles sweep) ── -->
+    <model name="paddle_target_left">
+      <static>false</static>
+      <pose>0.45 0.20 0.04 0 0 0</pose>
+      <link name="link">
+        <inertial><mass>0.05</mass>
+          <inertia><ixx>0.0001</ixx><iyy>0.0001</iyy><izz>0.0001</izz></inertia>
+        </inertial>
+        <collision name="col"><geometry><box><size>0.06 0.06 0.08</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>0.06 0.06 0.08</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+            <n>Gazebo/Yellow</n></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="paddle_target_right">
+      <static>false</static>
+      <pose>0.45 -0.20 0.04 0 0 0</pose>
+      <link name="link">
+        <inertial><mass>0.05</mass>
+          <inertia><ixx>0.0001</ixx><iyy>0.0001</iyy><izz>0.0001</izz></inertia>
+        </inertial>
+        <collision name="col"><geometry><box><size>0.06 0.06 0.08</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>0.06 0.06 0.08</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+            <n>Gazebo/Yellow</n></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ── Goal platform (robot navigates here, crank deploys) ─────── -->
+    <model name="goal_platform">
+      <static>true</static>
+      <pose>3.0 2.5 0.025 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.6 0.6 0.05</size></box></geometry></collision>
+        <visual name="vis">
+          <geometry><box><size>0.6 0.6 0.05</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+            <n>Gazebo/Green</n></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ── Navigation obstacles ─────────────────────────────────────── -->
+    <model name="obstacle_1"><static>true</static><pose>1.5 -1.0 0.3 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.4 0.4 0.6</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.4 0.4 0.6</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+            <n>Gazebo/Orange</n></script></material></visual>
+      </link>
+    </model>
+
+    <model name="obstacle_2"><static>true</static><pose>-1.2 1.5 0.3 0 0 0.523</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.5 0.25 0.6</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.5 0.25 0.6</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+            <n>Gazebo/Orange</n></script></material></visual>
+      </link>
+    </model>
+
+    <model name="obstacle_pillar"><static>true</static><pose>-0.5 -2.0 0.4 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><cylinder><radius>0.15</radius><length>0.8</length></cylinder></geometry></collision>
+        <visual name="vis"><geometry><cylinder><radius>0.15</radius><length>0.8</length></cylinder></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+            <n>Gazebo/Red</n></script></material></visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>

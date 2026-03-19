@@ -1,0 +1,38 @@
+# effector_config.yaml
+# Tunable parameters for all three DSServo effectors.
+# All GPIO numbers are BCM (Broadcom) numbering.
+
+paddle_controller_node:
+  ros__parameters:
+    # GPIO pins
+    pin_left:  17
+    pin_right: 27
+
+    # Servo angles (degrees)
+    neutral_angle_deg: 90.0   # resting/default position
+    active_angle_deg:  45.0   # swept-out position when triggered
+                               # increase toward 0° or 180° for more aggression
+
+    # Sweep timing
+    sweep_duration_sec: 0.3   # seconds to complete one direction of swing
+    return_delay_sec:   0.5   # seconds to hold at active_angle before returning
+
+    # LiDAR trigger
+    paddle_trigger_distance: 0.50   # metres — trigger when object closer than this
+    check_angle_deg:         40.0   # degrees either side of robot forward to watch
+    cooldown_seconds:         2.0   # minimum seconds between re-triggers
+
+
+crank_controller_node:
+  ros__parameters:
+    # GPIO pin
+    pin_crank: 4
+
+    # Servo angles (degrees)
+    retracted_angle_deg:   0.0   # home / safe position
+    extended_angle_deg:  180.0   # deployed / active position
+
+    # Sweep timing
+    sweep_duration_sec: 0.6   # seconds for one full sweep direction
+    hold_duration_sec:  0.8   # seconds to hold at extended before retracting
+    cooldown_seconds:   3.0   # minimum seconds between re-triggers

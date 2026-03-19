@@ -1,0 +1,10 @@
+{
+  "names": {
+    "robot_bringup":     { "cmake-args": ["-DCMAKE_BUILD_TYPE=Release"] },
+    "robot_description": { "cmake-args": ["-DCMAKE_BUILD_TYPE=Release"] },
+    "robot_navigation":  { "cmake-args": ["-DCMAKE_BUILD_TYPE=Release"] },
+    "robot_drivers":     { "cmake-args": ["-DCMAKE_BUILD_TYPE=Release"] },
+    "robot_effectors":   { "cmake-args": ["-DCMAKE_BUILD_TYPE=Release"] },
+    "robot_simulation":  { "cmake-args": ["-DCMAKE_BUILD_TYPE=Release"] }
+  }
+}

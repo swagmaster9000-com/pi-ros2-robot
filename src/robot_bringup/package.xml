@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <n>robot_bringup</n>
+  <version>0.1.0</version>
+  <description>Master bringup package — real hardware and simulation launch files.</description>
+  <maintainer email="you@example.com">Your Name</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>robot_description</exec_depend>
+  <exec_depend>robot_navigation</exec_depend>
+  <exec_depend>robot_drivers</exec_depend>
+  <exec_depend>robot_effectors</exec_depend>
+  <exec_depend>robot_simulation</exec_depend>
+  <exec_depend>ros2launch</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
