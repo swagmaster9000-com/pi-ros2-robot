@@ -49,31 +49,31 @@ ros2 launch robot_bringup sim.launch.py
 ### TB6612FNG — Front Driver (motors FL + FR)
 | Signal | RPi GPIO (BCM) |
 |---|---|
-| PWMA (FL speed) | 12 |
-| AIN1 (FL dir)   | 23 |
-| AIN2 (FL dir)   | 24 |
-| PWMB (FR speed) | 13 |
-| BIN1 (FR dir)   | 20 |
-| BIN2 (FR dir)   | 21 |
-| STBY            | 25 |
+| PWMA (FL speed) | 2 |
+| AIN1 (FL dir)   | 22 |
+| AIN2 (FL dir)   | 23 |
+| PWMB (FR speed) | 3 |
+| BIN1 (FR dir)   | 24 |
+| BIN2 (FR dir)   | 25 |
+| STBY            | 30 |
 
 ### TB6612FNG — Rear Driver (motors RL + RR)
 | Signal | RPi GPIO (BCM) |
 |---|---|
-| PWMA (RL speed) | 18 |
-| AIN1 (RL dir)   | 5  |
-| AIN2 (RL dir)   | 6  |
-| PWMB (RR speed) | 19 |
-| BIN1 (RR dir)   | 16 |
-| BIN2 (RR dir)   | 26 |
-| STBY            | 22 |
+| PWMA (RL speed) | 4 |
+| AIN1 (RL dir)   | 26  |
+| AIN2 (RL dir)   | 27 |
+| PWMB (RR speed) | 5 |
+| BIN1 (RR dir)   | 28 |
+| BIN2 (RR dir)   | 29 |
+| STBY            | 31 |
 
 ### DSServo — Effectors
 | Servo | RPi GPIO (BCM) | Default angle |
 |---|---|---|
-| Paddle Left  | 17 | 90° (neutral) |
-| Paddle Right | 27 | 90° (neutral) |
-| Crank        | 4  | 0°  (retracted) |
+| Paddle Left  | - | 90° (neutral) |
+| Paddle Right | - | 90° (neutral) |
+| Crank        | - | 0°  (retracted) |
 
 ## Servo Auto-Trigger Logic
 
