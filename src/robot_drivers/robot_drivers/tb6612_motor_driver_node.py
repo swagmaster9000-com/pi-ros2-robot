@@ -155,22 +155,22 @@ class TB6612MotorDriverNode(Node):
         self.declare_parameter("max_speed",         0.5)    # m/s
 
         # GPIO — Front driver (TB6612FNG #1)
-        self.declare_parameter("front_pwm_a",  12)
-        self.declare_parameter("front_ain1",   23)
-        self.declare_parameter("front_ain2",   24)
-        self.declare_parameter("front_pwm_b",  13)
-        self.declare_parameter("front_bin1",   20)
-        self.declare_parameter("front_bin2",   21)
-        self.declare_parameter("front_stby",   25)
+        self.declare_parameter("front_pwm_a",  2)
+        self.declare_parameter("front_ain1",   22)
+        self.declare_parameter("front_ain2",   23)
+        self.declare_parameter("front_pwm_b",  3)
+        self.declare_parameter("front_bin1",   24)
+        self.declare_parameter("front_bin2",   25)
+        self.declare_parameter("front_stby",   30)
 
         # GPIO — Rear driver (TB6612FNG #2)
-        self.declare_parameter("rear_pwm_a",   18)
-        self.declare_parameter("rear_ain1",     5)
-        self.declare_parameter("rear_ain2",     6)
-        self.declare_parameter("rear_pwm_b",   19)
-        self.declare_parameter("rear_bin1",    16)
-        self.declare_parameter("rear_bin2",    26)
-        self.declare_parameter("rear_stby",    22)
+        self.declare_parameter("rear_pwm_a",   4)
+        self.declare_parameter("rear_ain1",    26)
+        self.declare_parameter("rear_ain2",    27)
+        self.declare_parameter("rear_pwm_b",   5)
+        self.declare_parameter("rear_bin1",    28)
+        self.declare_parameter("rear_bin2",    29)
+        self.declare_parameter("rear_stby",    31)
 
         self.wheel_base  = self.get_parameter("wheel_base_width").value
         self.wheel_r     = self.get_parameter("wheel_radius").value
