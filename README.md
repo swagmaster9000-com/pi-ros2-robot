@@ -1,7 +1,7 @@
 
-#Personal Competition Robot — ROS2 Humble
+## Personal Competition Robot — ROS2 Humble
 
-Personal workspace for a 4-wheel skid-steer competition robot running on Raspberry Pi 4/5.
+Personal workspace for a 4-wheel skid-steer competition robot running on Raspberry Pi 4 Model B.
 
 ## Hardware
 
