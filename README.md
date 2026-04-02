@@ -88,6 +88,7 @@ ros2 launch robot_bringup sim.launch.py
 
 ### DSServo — Effectors
 | Servo | RPi GPIO (BCM) | Default angle |
+|---|---|---|
 | Paddle Left  | 16 | 90° (neutral) |
 | Paddle Right | 36 | 90° (neutral) |
 | Crank        | 26 | 0°  (retracted) |
