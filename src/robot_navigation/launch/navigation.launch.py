@@ -23,16 +23,35 @@ def generate_launch_description():
 
     use_sim_time_arg = DeclareLaunchArgument("use_sim_time", default_value="false")
     use_rviz_arg     = DeclareLaunchArgument("use_rviz",     default_value="true")
-    map_arg = DeclareLaunchArgument(
-        "map",
-        default_value=os.path.join(nav_pkg, "maps", "competition_map.yaml"),
-        description="Full path to map yaml file",
-    )
+    map_file = LaunchCOnfiguration('map')
+    lidar_device = LaunchConfiguration('lidar_device')
+    autostart = LaunchConfiguration('autostart')
     # Set to e.g. /dev/ttyUSB0 to auto-start the RPLidar driver
-    lidar_device_arg = DeclareLaunchArgument(
-        "lidar_device",
-        default_value="",
-        description="Serial device for RPLidar (empty = don't launch lidar node)",
+    declare_use_sim_time = DeclareLaunchArgument(
+        'use_sim_time',
+        default_value='false'
+    )
+
+    declare_use_rviz = DeclareLaunchArgument(
+        'use_rviz',
+        default_value='true'
+    )
+
+    declare_autostart = DeclareLaunchArgument(
+        'autostart',
+        default_value='true'
+    )
+
+    declare_map = DeclareLaunchArgument(
+        'map',
+        default_value=default_map,
+        description='Path to map yaml file'
+    )
+
+    declare_lidar_device = DeclareLaunchArgument(
+        'lidar_device',
+        default_value='',
+        description='Serial device for lidar, for example /dev/ttyUSB0'
     )
 
     # ── RPLidar node (optional) ───────────────────────────────────────────
@@ -40,18 +59,20 @@ def generate_launch_description():
     rplidar_node = Node(
         package="rplidar_ros",
         executable="rplidar_composition",
+        name='rplidar',
         output="screen",
         parameters=[{
-            "serial_port":     LaunchConfiguration("lidar_device"),
+            "serial_port": lidar_device,
             "serial_baudrate": 115200,
             "frame_id":        "lidar_link",
             "inverted":        False,
             "angle_compensate": True,
+            "scan_mode": "Standard",
         }],
         condition=IfCondition(
-            # Only launch if lidar_device is non-empty
-            # We abuse IfCondition with a non-empty string as truthy
-            LaunchConfiguration("lidar_device"),
+            PythonExpression([
+                "'", lidar_device, "' != '"
+            ])
         ),
     )
 
@@ -79,8 +100,9 @@ def generate_launch_description():
     return LaunchDescription([
         use_sim_time_arg,
         use_rviz_arg,
-        map_arg,
-        lidar_device_arg,
+        autostart,
+        map,
+        lidar_device,
         rplidar_node,
         nav2_launch,
         rviz_launch,
